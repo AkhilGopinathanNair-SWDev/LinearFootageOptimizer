@@ -22,21 +22,27 @@ public class LinearFootageOptimizer {
         double totalWidthInches = 0.0;
 
         for (LineItem item : lineItems) {
-            if (totalWidthInches > truckWidthInches * 0.5) {
+            double itemLinearFootage = calculateItemLinearFootage(item);
+
+            if (totalWidthInches + item.getWidthInches() <= truckWidthInches / 2) {
+                totalWidthInches += item.getWidthInches();
+            } else {
                 totalWidthInches = truckWidthInches; // Takes up entire width
             }
 
-            double itemLinearFootage = calculateItemLinearFootage(item);
-            if (totalWidthInches + item.getWidthInches() <= truckWidthInches) {
-                totalLinearFootage += itemLinearFootage;
-                totalWidthInches += item.getWidthInches();
-            } else {
-                // If adding the item exceeds the width, start a new row
-                totalWidthInches = item.getWidthInches();
+            if (item.getWidthInches() > truckWidthInches / 2) {
+                // If it takes up more than 50% width, consider it taking up the entire width
+                totalWidthInches = truckWidthInches;
                 totalLinearFootage += itemLinearFootage;
             }
+            else
+            {
+            	totalLinearFootage += itemLinearFootage/2;
+            }
 
-            if (totalLinearFootage * 12 > truckHeightInches) {
+         //   totalLinearFootage += itemLinearFootage;
+
+          if (totalLinearFootage * 12 > truckHeightInches) {
                 totalLinearFootage = (totalLinearFootage * 12) / 2; // Divide by 2 if more than 50% height
             }
         }
