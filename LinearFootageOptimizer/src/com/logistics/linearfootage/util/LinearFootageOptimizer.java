@@ -42,7 +42,7 @@ public class LinearFootageOptimizer {
 				totalLinearFootage += itemLinearFootage / 2;
 			}
 
-			firstColumn = false;
+			firstColumn = !firstColumn;
 
 		}
 
