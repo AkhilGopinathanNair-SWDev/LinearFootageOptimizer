@@ -9,7 +9,7 @@
  * @since 2023-11-01
  */
 
-package com.logistics.linearfootage;
+package com.logistics.linearfootage.model;
 
 public class LineItem {
 
