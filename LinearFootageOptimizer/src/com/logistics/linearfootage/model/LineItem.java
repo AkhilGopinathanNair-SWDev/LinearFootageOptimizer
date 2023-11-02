@@ -13,14 +13,16 @@ package com.logistics.linearfootage.model;
 
 public class LineItem {
 
-	private int lengthInches; // Length of the shipment in inches
-	private int widthInches; // Width of the shipment in inches
-	private int heightInches; // Height of the shipment in inches
+	private int lengthInches; // Length of the item in inches
+	private int widthInches; // Width of the item in inches
+	private int heightInches; // Height of the item in inches
 
-	private int weightLbs; // Weight of the shipment in pounds
+	private int weightLbs; // Weight of the item in pounds
 
 	private boolean stackable; // Indicates if the item is stackable
 	private boolean turnable; // Indicates if the item is turnable
+	
+	private double linearFootage; // Hold Linear Footage of the item
 
 	/**
 	 * Initializes a new LineItem instance with default values.
@@ -130,6 +132,20 @@ public class LineItem {
 	 */
 	public void setTurnable(boolean turnable) {
 		this.turnable = turnable;
+	}
+
+	/**
+	 * @return the linearFootage
+	 */
+	public double getLinearFootage() {
+		return linearFootage;
+	}
+
+	/**
+	 * @param linearFootage the linearFootage to set
+	 */
+	public void setLinearFootage(double linearFootage) {
+		this.linearFootage = linearFootage;
 	}
 
 }
