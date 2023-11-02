@@ -15,6 +15,7 @@ import java.util.List;
 
 import com.logistics.linearfootage.input.InputDataGenerator;
 import com.logistics.linearfootage.model.LineItem;
+import com.logistics.linearfootage.util.LinearFootageOptimizer;
 
 public class LinearFootageOptimizerApplication {
 
@@ -32,7 +33,29 @@ public class LinearFootageOptimizerApplication {
 		
 		// TODO: Added for testing. Need to remove below print statements and create a separate test class for input simulation.
 		
+		/*
+		 * Commenting out input simulation using random values.
 		lineItems = inputDataGenerator.generateInputData(20);
+		*/
+		
+		// Populating lineItems list as per the given example for testing.
+        // Example 1:  1 pallet @ 48 L x 48 W x 32 H is 2 linear feet
+        lineItems.add(new LineItem(48, 48, 32, 0, false, false));
+
+        // Example 2: 2 pallets @ 48 L x 48 W x 32 H is 4 linear feet
+        lineItems.add(new LineItem(48, 48, 32, 0, false, false));
+        lineItems.add(new LineItem(48, 48, 32, 0, false, false));
+
+        // Example 3: 2 pallets @ 48 L x 48 W x 32 H, stackable is 2 linear feet
+        lineItems.add(new LineItem(48, 48, 32, 0, true, false));
+        lineItems.add(new LineItem(48, 48, 32, 0, true, false));
+
+        // Example 4: 1 pallet @ 48 L x 62 W x 32 H is 4 linear feet
+        lineItems.add(new LineItem(48, 62, 32, 0, false, false));
+
+        // Example 5: 1 pallet @ 48 L x 62 W x 32 H, turnable is 3 linear feet
+        lineItems.add(new LineItem(48, 62, 32, 0, false, true));
+        
 		
         // Print the LineItems
         for (LineItem item : lineItems) {
@@ -45,6 +68,10 @@ public class LinearFootageOptimizerApplication {
             System.out.println("Turnable: " + item.isTurnable());
             System.out.println();
         }
+        
+        LinearFootageOptimizer linearFootageOptimizer = new LinearFootageOptimizer();
+      //List<LineItem> optimizedLineItems = linearFootageOptimizer.optimizeLinearFootage(lineItems);
+        
 
 	}
 
