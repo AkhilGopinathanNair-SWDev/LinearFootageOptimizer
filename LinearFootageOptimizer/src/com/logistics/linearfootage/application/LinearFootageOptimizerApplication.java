@@ -12,9 +12,11 @@ package com.logistics.linearfootage.application;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.logistics.linearfootage.input.InputDataGenerator;
 import com.logistics.linearfootage.model.LineItem;
+import com.logistics.linearfootage.model.LinearFootageResult;
 import com.logistics.linearfootage.util.LinearFootageOptimizer;
 
 public class LinearFootageOptimizerApplication {
@@ -27,52 +29,32 @@ public class LinearFootageOptimizerApplication {
 	 */
 	public static void main(String[] args) {
 		
-		List<LineItem> lineItems = new ArrayList<>();
-		
-		InputDataGenerator inputDataGenerator = new InputDataGenerator();
-		
-		// TODO: Added for testing. Need to remove below print statements and create a separate test class for input simulation.
-		
-		/*
-		 * Commenting out input simulation using random values.
-		lineItems = inputDataGenerator.generateInputData(20);
-		*/
-		
-		// Populating lineItems list as per the given example for testing.
-        // Example 1:  1 pallet @ 48 L x 48 W x 32 H is 2 linear feet
-        lineItems.add(new LineItem(48, 48, 32, 0, false, false));
+		Scanner scanner = new Scanner(System.in);
 
-        // Example 2: 2 pallets @ 48 L x 48 W x 32 H is 4 linear feet
-        lineItems.add(new LineItem(48, 48, 32, 0, false, false));
-        lineItems.add(new LineItem(48, 48, 32, 0, false, false));
+        System.out.println("Enter the dimensions of the truck (width in inches, height in inches):");
+        int truckWidthInches = scanner.nextInt();
+        int truckHeightInches = scanner.nextInt();
 
-        // Example 3: 2 pallets @ 48 L x 48 W x 32 H, stackable is 2 linear feet
-        lineItems.add(new LineItem(48, 48, 32, 0, true, false));
-        lineItems.add(new LineItem(48, 48, 32, 0, true, false));
+        System.out.println("Enter the number of skids/line items:");
+        int itemCount = scanner.nextInt();
 
-        // Example 4: 1 pallet @ 48 L x 62 W x 32 H is 4 linear feet
-        lineItems.add(new LineItem(48, 62, 32, 0, false, false));
-
-        // Example 5: 1 pallet @ 48 L x 62 W x 32 H, turnable is 3 linear feet
-        lineItems.add(new LineItem(48, 62, 32, 0, false, true));
-        
-		
-        // Print the LineItems
-        for (LineItem item : lineItems) {
-            System.out.println("LineItem Details:");
-            System.out.println("Length: " + item.getLengthInches() + " inches");
-            System.out.println("Width: " + item.getWidthInches() + " inches");
-            System.out.println("Height: " + item.getHeightInches() + " inches");
-            System.out.println("Weight: " + item.getWeightLbs() + " lbs");
-            System.out.println("Stackable: " + item.isStackable());
-            System.out.println("Turnable: " + item.isTurnable());
-            System.out.println();
+        List<LineItem> lineItems = new ArrayList<>();
+        for (int i = 1; i <= itemCount; i++) {
+            System.out.println("Enter dimensions for Line Item " + i + " (length, width, height in inches):");
+            int lengthInches = scanner.nextInt();
+            int widthInches = scanner.nextInt();
+            int heightInches = scanner.nextInt();
+            lineItems.add(new LineItem(lengthInches, widthInches, heightInches, 1, false, false));
         }
-        
-        LinearFootageOptimizer linearFootageOptimizer = new LinearFootageOptimizer();
-      //List<LineItem> optimizedLineItems = linearFootageOptimizer.optimizeLinearFootage(lineItems);
-        
 
+        int linearFeet = calculateLinearFootage(lineItems, truckWidthInches, truckHeightInches);
+        System.out.println("Linear footage: " + linearFeet + " feet");
+        
 	}
 
+	private static int calculateLinearFootage(List<LineItem> lineItems, int truckWidthInches, int truckHeightInches) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+    
 }
