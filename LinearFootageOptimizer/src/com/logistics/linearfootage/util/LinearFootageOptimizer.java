@@ -19,43 +19,42 @@ public class LinearFootageOptimizer {
 
 	public int calculateLinearFootage(List<LineItem> lineItems, int truckWidthInches, int truckHeightInches) {
 		double totalLinearFootage = 0.0;
-        double totalWidthInches = 0.0;
+		double totalWidthInches = 0.0;
+		boolean firstColumn = true;
 
-        for (LineItem item : lineItems) {
-            double itemLinearFootage = calculateItemLinearFootage(item);
+		for (LineItem item : lineItems) {
+			double itemLinearFootage = calculateItemLinearFootage(item);
+			if (totalWidthInches == truckWidthInches) {
+				totalWidthInches = 0;
+			}
 
-            if (totalWidthInches + item.getWidthInches() <= truckWidthInches / 2) {
-                totalWidthInches += item.getWidthInches();
-            } else {
-                totalWidthInches = truckWidthInches; // Takes up entire width
-            }
+			if (totalWidthInches + item.getWidthInches() <= truckWidthInches / 2) {
+				totalWidthInches += item.getWidthInches();
+			} else {
+				totalWidthInches = truckWidthInches; // Takes up entire width
+			}
 
-            if (item.getWidthInches() > truckWidthInches / 2) {
-                // If it takes up more than 50% width, consider it taking up the entire width
-                totalWidthInches = truckWidthInches;
-                totalLinearFootage += itemLinearFootage;
-            }
-            else
-            {
-            	totalLinearFootage += itemLinearFootage/2;
-            }
+			if (item.getWidthInches() > truckWidthInches / 2 && firstColumn) {
+				// If it takes up more than 50% width, consider it taking up the entire width
+				totalWidthInches = truckWidthInches;
+				totalLinearFootage += itemLinearFootage;
+			} else {
+				totalLinearFootage += itemLinearFootage / 2;
+			}
 
-         //   totalLinearFootage += itemLinearFootage;
+			firstColumn = false;
 
-          if (totalLinearFootage * 12 > truckHeightInches) {
-                totalLinearFootage = (totalLinearFootage * 12) / 2; // Divide by 2 if more than 50% height
-            }
-        }
+		}
 
-        // Round the result to the next whole number
-        int roundedLinearFootage = (int) Math.ceil(totalLinearFootage);
+		// Round the result to the next whole number
+		int roundedLinearFootage = (int) Math.ceil(totalLinearFootage);
 
-        return roundedLinearFootage;
+		return roundedLinearFootage;
 	}
 
 	public double calculateItemLinearFootage(LineItem item) {
-        double linearFootage = (item.getLengthInches() / 12.0);
-        return linearFootage;
+		double linearFootage = (item.getLengthInches() / 12.0);
+		return linearFootage;
 	}
 
 }
