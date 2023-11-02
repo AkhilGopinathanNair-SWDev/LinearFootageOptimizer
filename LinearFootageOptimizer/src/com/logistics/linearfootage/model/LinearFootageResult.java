@@ -16,21 +16,21 @@ import java.util.List;
 
 public class LinearFootageResult {
 	private int roundedLinearFootage;
-    private List<LineItem> lineItems;
+	private List<LineItem> lineItems;
 
-    public LinearFootageResult(int roundedLinearFootage, List<LineItem> lineItems) {
-        this.roundedLinearFootage = roundedLinearFootage;
-        this.lineItems = lineItems;
-    }
+	public LinearFootageResult(int roundedLinearFootage, List<LineItem> lineItems) {
+		this.roundedLinearFootage = roundedLinearFootage;
+		this.lineItems = lineItems;
+	}
 
-    public LinearFootageResult() {
+	public LinearFootageResult() {
 	}
 
 	public int getRoundedLinearFootage() {
-        return roundedLinearFootage;
-    }
+		return roundedLinearFootage;
+	}
 
-    public List<LineItem> getLineItems() {
-        return lineItems;
-    }
+	public List<LineItem> getLineItems() {
+		return lineItems;
+	}
 }

@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.logistics.linearfootage.input.InputDataGenerator;
 import com.logistics.linearfootage.model.LineItem;
-import com.logistics.linearfootage.model.LinearFootageResult;
 import com.logistics.linearfootage.util.LinearFootageOptimizer;
 
 public class LinearFootageOptimizerApplication {
@@ -28,33 +26,30 @@ public class LinearFootageOptimizerApplication {
 	 * @param args Command-line arguments.
 	 */
 	public static void main(String[] args) {
-		
-		Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter the dimensions of the truck (width in inches, height in inches):");
-        int truckWidthInches = scanner.nextInt();
-        int truckHeightInches = scanner.nextInt();
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Enter the dimensions of the truck (width in inches, height in inches):");
+			int truckWidthInches = scanner.nextInt();
+			int truckHeightInches = scanner.nextInt();
 
-        System.out.println("Enter the number of skids/line items:");
-        int itemCount = scanner.nextInt();
+			System.out.println("Enter the number of skids/line items:");
+			int itemCount = scanner.nextInt();
 
-        List<LineItem> lineItems = new ArrayList<>();
-        for (int i = 1; i <= itemCount; i++) {
-            System.out.println("Enter dimensions for Line Item " + i + " (length, width, height in inches):");
-            int lengthInches = scanner.nextInt();
-            int widthInches = scanner.nextInt();
-            int heightInches = scanner.nextInt();
-            lineItems.add(new LineItem(lengthInches, widthInches, heightInches, 1, false, false));
-        }
+			List<LineItem> lineItems = new ArrayList<>();
+			for (int i = 1; i <= itemCount; i++) {
+				System.out.println("Enter dimensions for Line Item " + i + " (length, width, height in inches):");
+				int lengthInches = scanner.nextInt();
+				int widthInches = scanner.nextInt();
+				int heightInches = scanner.nextInt();
+				lineItems.add(new LineItem(lengthInches, widthInches, heightInches, 1, false, false));
+			}
 
-        int linearFeet = calculateLinearFootage(lineItems, truckWidthInches, truckHeightInches);
-        System.out.println("Linear footage: " + linearFeet + " feet");
-        
+			LinearFootageOptimizer linearFootageOptimizer = new LinearFootageOptimizer();
+			int linearFeet = linearFootageOptimizer.calculateLinearFootage(lineItems, truckWidthInches,
+					truckHeightInches);
+			System.out.println("Linear footage: " + linearFeet + " feet");
+		}
+
 	}
 
-	private static int calculateLinearFootage(List<LineItem> lineItems, int truckWidthInches, int truckHeightInches) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-    
 }

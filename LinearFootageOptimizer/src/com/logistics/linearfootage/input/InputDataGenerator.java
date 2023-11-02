@@ -42,7 +42,6 @@ public class InputDataGenerator {
 			// Generate random properties
 			boolean stackable = random.nextBoolean();
 			boolean turnable = random.nextBoolean();
-
 			// Create a LineItem object and add it to the list
 			LineItem lineItem = new LineItem(lengthInches, widthInches, heightInches, weightLbs, stackable, turnable);
 			inputItems.add(lineItem);

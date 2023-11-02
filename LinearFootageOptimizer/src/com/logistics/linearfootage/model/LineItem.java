@@ -21,7 +21,7 @@ public class LineItem {
 
 	private boolean stackable; // Indicates if the item is stackable
 	private boolean turnable; // Indicates if the item is turnable
-	
+
 	private double linearFootage; // Hold Linear Footage of the item
 
 	/**
