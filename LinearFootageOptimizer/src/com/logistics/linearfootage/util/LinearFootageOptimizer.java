@@ -29,7 +29,9 @@ public class LinearFootageOptimizer {
 	public int calculateLinearFootage(List<LineItem> lineItems, int truckWidthInches, int truckHeightInches) {
 		double totalLinearFootage = 0.0;
 		double totalWidthInches = 0.0;
+		//Flag to check if we have already stacked an item over another item
 		boolean alreadyStacked = false;
+		//Flag to check if we have already placed an item in the same row
 		boolean firstColumn = true;
 
 		for (LineItem item : lineItems) {
@@ -108,7 +110,7 @@ public class LinearFootageOptimizer {
 				// Check if the item behind is stackable, has the same width, and fits within
 				// truck height.
 				if (itemBehind.isStackable() && itemBehind.getWidthInches() == currentItem.getWidthInches()
-						&& (currentItem.getHeightInches() + itemBehind.getWidthInches()) < truckHeightInches) {
+						&& (currentItem.getHeightInches() + itemBehind.getHeightInches()) < truckHeightInches) {
 					return true;
 				}
 			}
