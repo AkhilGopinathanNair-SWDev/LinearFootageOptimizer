@@ -44,7 +44,7 @@ public class LinearFootageOptimizer {
 				}
 			} else {
 				if (IsAllowedToStack(lineItems, item, truckHeightInches)) {
-					if(alreadyStacked) {
+					if (alreadyStacked) {
 						totalLinearFootage += itemLinearFootage / 2;
 					}
 					alreadyStacked = true;
@@ -67,7 +67,7 @@ public class LinearFootageOptimizer {
 		double linearFootage = (item.getLengthInches() / 12.0);
 		return linearFootage;
 	}
-	
+
 	public boolean IsAllowedToStack(List<LineItem> lineItems, LineItem currentItem, int truckHeightInches) {
 		if (currentItem.isStackable()) {
 			int currentIndex = lineItems.indexOf(currentItem);

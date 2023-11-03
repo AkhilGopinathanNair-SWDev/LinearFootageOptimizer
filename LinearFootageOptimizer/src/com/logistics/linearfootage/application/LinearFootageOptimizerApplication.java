@@ -10,11 +10,9 @@
 
 package com.logistics.linearfootage.application;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.logistics.linearfootage.model.LineItem;
+import com.logistics.linearfootage.input.ShipmentInputData;
 import com.logistics.linearfootage.util.LinearFootageOptimizer;
 
 public class LinearFootageOptimizerApplication {
@@ -28,30 +26,25 @@ public class LinearFootageOptimizerApplication {
 	public static void main(String[] args) {
 
 		try (Scanner scanner = new Scanner(System.in)) {
-			System.out.println("Enter the dimensions of the truck (width in inches, height in inches):");
-			int truckWidthInches = scanner.nextInt();
-			int truckHeightInches = scanner.nextInt();
 
-			System.out.println("Enter the number of skids/line items:");
-			int itemCount = scanner.nextInt();
+			System.out.println("******************** WELCOME TO LINEAR FOOTAGE OPTIMIZER********************");
 
-			List<LineItem> lineItems = new ArrayList<>();
-			for (int i = 1; i <= itemCount; i++) {
-				System.out.println("Enter dimensions for Line Item " + i + " (length, width, height in inches):");
-				int lengthInches = scanner.nextInt();
-				int widthInches = scanner.nextInt();
-				int heightInches = scanner.nextInt();
-				System.out.println("Item Stackable or Not (true/false):");
-				boolean stackable = scanner.nextBoolean();
-				lineItems.add(new LineItem(lengthInches, widthInches, heightInches, 1, stackable, false));
-			}
+			// ---Collecting the INPUTS from the user---
+			ShipmentInputData shipmentInputData = new ShipmentInputData();
+			shipmentInputData.gatherUserInput();
 
+			// Invoke the linear footage algorithm to to calculate the linear footage for
+			// the given Line items and the dimensions of trailer in consideration
 			LinearFootageOptimizer linearFootageOptimizer = new LinearFootageOptimizer();
-			int linearFeet = linearFootageOptimizer.calculateLinearFootage(lineItems, truckWidthInches,
-					truckHeightInches);
-			System.out.println("Linear footage: " + linearFeet + " feet");
+			int linearFeet = linearFootageOptimizer.calculateLinearFootage(shipmentInputData.getItems(),
+					shipmentInputData.getTruckWidthInches(), shipmentInputData.getTruckHeightInches());
+
+			// ---Display the OUTPUT after processing---
+			System.out.println("The LINEAR FOOTAGE of the Shipment is : " + linearFeet + " feet");
+
+			System.out.println("********************************************************************");
+			System.out.println("Thank you for using the Linear Footage Optimizer. Have a great day!");
+
 		}
-
 	}
-
 }
