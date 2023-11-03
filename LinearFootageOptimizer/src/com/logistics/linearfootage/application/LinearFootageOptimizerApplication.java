@@ -41,7 +41,9 @@ public class LinearFootageOptimizerApplication {
 				int lengthInches = scanner.nextInt();
 				int widthInches = scanner.nextInt();
 				int heightInches = scanner.nextInt();
-				lineItems.add(new LineItem(lengthInches, widthInches, heightInches, 1, false, false));
+				System.out.println("Item Stackable or Not (true/false):");
+				boolean stackable = scanner.nextBoolean();
+				lineItems.add(new LineItem(lengthInches, widthInches, heightInches, 1, stackable, false));
 			}
 
 			LinearFootageOptimizer linearFootageOptimizer = new LinearFootageOptimizer();

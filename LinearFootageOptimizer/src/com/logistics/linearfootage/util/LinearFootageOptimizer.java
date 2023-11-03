@@ -50,6 +50,7 @@ public class LinearFootageOptimizer {
 					alreadyStacked = true;
 				} else {
 					totalLinearFootage += itemLinearFootage / 2;
+					alreadyStacked = false;
 				}
 			}
 
