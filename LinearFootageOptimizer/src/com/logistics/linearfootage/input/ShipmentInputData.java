@@ -93,6 +93,25 @@ public class ShipmentInputData {
 				// constructor for LineItem class
 				this.items.add(new LineItem(lengthInches, widthInches, heightInches, 1, stackable, false));
 			}
+
+			formatItemList(); // Sort the list of LineItem objects by width dimension
+		}
+	}
+
+	/**
+	 * Sorts the list of LineItem objects based on their width dimension in
+	 * ascending order.
+	 */
+	public void formatItemList() {
+		int n = items.size();
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - i - 1; j++) {
+				if (items.get(j).getWidthInches() > items.get(j + 1).getWidthInches()) {
+					LineItem temp = items.get(j);
+					items.set(j, items.get(j + 1));
+					items.set(j + 1, temp);
+				}
+			}
 		}
 	}
 
